@@ -1,0 +1,7 @@
+name: Kill Stuck Runner
+on: workflow_dispatch
+jobs:
+  dummy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "New runner allocated"
