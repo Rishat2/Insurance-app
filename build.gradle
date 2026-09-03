@@ -33,8 +33,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    include '**/*Test.class'
-    include '**/*Tests.class'
-    include '**/*TestCase.class'
 }
 
