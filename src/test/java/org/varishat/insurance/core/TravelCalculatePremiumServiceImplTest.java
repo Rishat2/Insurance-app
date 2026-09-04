@@ -6,7 +6,7 @@ import org.varishat.insurance.rest.TravelCalculatePremiumResponse;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TravelCalculatePremiumServiceImplTest {
 
@@ -14,33 +14,45 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldFillPersonFirstName() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonFirstName("Ivan");
+        TravelCalculatePremiumRequest request = createRequestWithAllField();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
 
     @Test
     public void shouldFillPersonLastName() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setPersonLastName("Ivanov");
+        TravelCalculatePremiumRequest request = createRequestWithAllField();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
     }
 
     @Test
     public void shouldFillAgreementDateFrom() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateFrom(new Date());
+        TravelCalculatePremiumRequest request = createRequestWithAllField();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
     }
 
     @Test
     public void shouldFillAgreementDateTo() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumRequest request = createRequestWithAllField();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+    }
+
+    @Test
+    public void shouldFillAgreementPrice() {
+        TravelCalculatePremiumRequest request = createRequestWithAllField();
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertNotNull(response.getAgreementPrice());
+    }
+
+    private TravelCalculatePremiumRequest createRequestWithAllField () {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Ivan");
+        request.setPersonLastName("Ivanov");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+        return request;
     }
 }
