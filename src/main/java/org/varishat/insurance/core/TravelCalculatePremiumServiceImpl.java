@@ -1,5 +1,7 @@
 package org.varishat.insurance.core;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.varishat.insurance.rest.TravelCalculatePremiumRequest;
 import org.varishat.insurance.rest.TravelCalculatePremiumResponse;
@@ -7,13 +9,10 @@ import org.varishat.insurance.rest.TravelCalculatePremiumResponse;
 import java.math.BigDecimal;
 
 @Component
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     private final DateTimeService dateTimeService;
-
-    public TravelCalculatePremiumServiceImpl(DateTimeService dateTimeService) {
-        this.dateTimeService = dateTimeService;
-    }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
