@@ -5,11 +5,15 @@ import org.varishat.insurance.rest.TravelCalculatePremiumRequest;
 import org.varishat.insurance.rest.TravelCalculatePremiumResponse;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+
+    private final DateTimeService dateTimeService;
+
+    public TravelCalculatePremiumServiceImpl(DateTimeService dateTimeService) {
+        this.dateTimeService = dateTimeService;
+    }
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -18,11 +22,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(getDiffOfDays(request.getAgreementDateFrom(),request.getAgreementDateTo()));
+        response.setAgreementPrice(BigDecimal.valueOf(dateTimeService.getDiffOfDays
+                (request.getAgreementDateFrom(), request.getAgreementDateTo())));
         return response;
-    }
-    private BigDecimal getDiffOfDays(Date dateFrom, Date dateTo) {
-        long diff = dateTo.getTime() - dateFrom.getTime();
-        return BigDecimal.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
 }

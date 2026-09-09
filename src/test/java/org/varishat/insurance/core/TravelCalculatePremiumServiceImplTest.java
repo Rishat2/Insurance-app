@@ -1,5 +1,6 @@
 package org.varishat.insurance.core;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.varishat.insurance.rest.TravelCalculatePremiumRequest;
 import org.varishat.insurance.rest.TravelCalculatePremiumResponse;
@@ -10,7 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TravelCalculatePremiumServiceImplTest {
 
-    private final TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+    private TravelCalculatePremiumServiceImpl service;
+
+    @BeforeEach
+    public void setUp() {
+        DateTimeService timeService = new DateTimeService();
+        service = new TravelCalculatePremiumServiceImpl(timeService);
+    }
 
     @Test
     public void shouldFillPersonFirstName() {
